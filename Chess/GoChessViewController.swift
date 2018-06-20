@@ -12,8 +12,8 @@ class GoChessViewController: UIViewController {
     
     var chessPlay: GoChessPlay?
     
-    @IBAction func close(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func close(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
     }
     
     

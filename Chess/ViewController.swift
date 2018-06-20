@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     var navigation = UINavigationController()
     var fiveChessController = UIViewController()
     
-    @IBAction func goFiveChess(sender: AnyObject) {
+    @IBAction func goFiveChess(_ sender: AnyObject) {
         self.navigationController?.pushViewController(self.fiveChessController, animated: true)
     }
     
@@ -24,12 +24,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         self.myBtn.titleLabel?.font = UIFont(name: "iconfont", size: 30)
-        self.myBtn.setTitle("\u{e605}", forState: UIControlState.Normal)
-        self.myBtn.setTitleColor(UIColor(red:0.01, green:0.65, blue:0.54, alpha:1), forState: UIControlState.Normal)
+        self.myBtn.setTitle("\u{e605}", for: UIControlState())
+        self.myBtn.setTitleColor(UIColor(red:0.01, green:0.65, blue:0.54, alpha:1), for: UIControlState())
         
         self.sysBtn.titleLabel?.font = UIFont(name: "iconfont", size: 30)
-        self.sysBtn.setTitle("\u{e604}", forState: UIControlState.Normal)
-        self.sysBtn.setTitleColor(UIColor(red:0.01, green:0.65, blue:0.54, alpha:1), forState: UIControlState.Normal)
+        self.sysBtn.setTitle("\u{e604}", for: UIControlState())
+        self.sysBtn.setTitleColor(UIColor(red:0.01, green:0.65, blue:0.54, alpha:1), for: UIControlState())
         
         
     }

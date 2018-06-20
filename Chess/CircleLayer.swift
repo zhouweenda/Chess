@@ -12,7 +12,7 @@ class CircleLayer: CALayer {
     var progress: CGFloat = 1.0
     var lineWidth: CGFloat = 6.0
     
-    override init(layer: AnyObject) {
+    override init(layer: Any) {
         super.init(layer: layer)
         
         let circleLayer = layer as! CircleLayer
@@ -28,7 +28,7 @@ class CircleLayer: CALayer {
         super.init(coder: aDecoder)
     }
     
-    override class func needsDisplayForKey(key: String) -> Bool {
+    override class func needsDisplay(forKey key: String) -> Bool {
         switch key{
         case "progress":
             return true
@@ -36,15 +36,15 @@ class CircleLayer: CALayer {
             break
         }
         
-        return super.needsDisplayForKey(key)
+        return super.needsDisplay(forKey: key)
     }
 
-    override func drawInContext(ctx: CGContext) {
+    override func draw(in ctx: CGContext) {
         
         let path = UIBezierPath()
         
-        let radius = min(CGRectGetWidth(bounds), CGRectGetHeight(bounds)) / 2 - lineWidth / 2
-        let center = CGPoint(x: CGRectGetMidX(bounds), y: CGRectGetMidY(bounds))
+        let radius = min(bounds.width, bounds.height) / 2 - lineWidth / 2
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
         
         let originStart = M_PI * 7 / 2
         let originEnd = M_PI * 2
@@ -54,12 +54,12 @@ class CircleLayer: CALayer {
         let destEnd = 0.0
         let currentDest = destStart - (destStart - destEnd) * Double(progress)
         
-        path.addArcWithCenter(center, radius: radius, startAngle: CGFloat(currentOrigin), endAngle: CGFloat(currentDest), clockwise: false)
+        path.addArc(withCenter: center, radius: radius, startAngle: CGFloat(currentOrigin), endAngle: CGFloat(currentDest), clockwise: false)
         
-        CGContextAddPath(ctx, path.CGPath)
-        CGContextSetLineWidth(ctx, lineWidth)
-        CGContextSetStrokeColorWithColor(ctx, UIColor(red:0.2, green:0.66, blue:0.33, alpha:1).CGColor)
-        CGContextStrokePath(ctx)
+        ctx.addPath(path.cgPath)
+        ctx.setLineWidth(lineWidth)
+        ctx.setStrokeColor(UIColor(red:0.2, green:0.66, blue:0.33, alpha:1).cgColor)
+        ctx.strokePath()
     }
     
     

@@ -28,11 +28,11 @@ class ChessView: UIView {
         self.chessPos = chessPos
         
         self.blockView = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        self.blockView.backgroundColor = UIColor.clearColor()
+        self.blockView.backgroundColor = UIColor.clear
         //self.blockView.layer.borderWidth = 1
         //self.blockView.layer.borderColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0).CGColor
         //self.blockView.font = UIFont(name: "iconfont", size: 50)
-        self.blockView.textAlignment = NSTextAlignment.Center
+        self.blockView.textAlignment = NSTextAlignment.center
         
         super.init(frame: CGRect(x: pos.x, y: pos.y, width: 100, height: 100))
         self.addSubview(self.blockView)
@@ -43,7 +43,7 @@ class ChessView: UIView {
         super.init(coder: aDecoder)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if ChessPlay.isOver{
             return
         }
@@ -59,7 +59,7 @@ class ChessView: UIView {
             self.addSubview(self.circleView!)
             
             self.val = 0
-            ChessPlay.player1?.textColor = UIColor.grayColor()
+            ChessPlay.player1?.textColor = UIColor.gray
             ChessPlay.player2?.textColor = UIColor(red:0.91, green:0.26, blue:0.21, alpha:1)
             
             self.circleView!.play()
@@ -72,7 +72,7 @@ class ChessView: UIView {
             self.addSubview(self.crossView!)
             
             self.val = 1
-            ChessPlay.player2?.textColor = UIColor.grayColor()
+            ChessPlay.player2?.textColor = UIColor.gray
             ChessPlay.player1?.textColor = UIColor(red:0.2, green:0.66, blue:0.33, alpha:1)
             
             self.crossView!.play()
@@ -86,17 +86,17 @@ class ChessView: UIView {
                 ChessPlay.winBoard?.text = "Player1 WIN!"
                 ChessPlay.winBoard!.textColor = UIColor(red:0.2, green:0.66, blue:0.33, alpha:1)
                 ChessPlay.huangGuan!.frame = CGRect(x: 10, y: 30, width: 60, height: 60)
-                ChessPlay.huangGuan!.hidden = false
+                ChessPlay.huangGuan!.isHidden = false
             } else {
                 ChessPlay.winBoard?.text = "Player2 WIN!"
                 ChessPlay.winBoard!.textColor = UIColor(red:0.91, green:0.26, blue:0.21, alpha:1)
                 ChessPlay.huangGuan!.frame = CGRect(x: 250, y: 30, width: 60, height: 60)
-                ChessPlay.huangGuan!.hidden = false
+                ChessPlay.huangGuan!.isHidden = false
             }
-            ChessPlay.replay!.hidden = false
-            ChessPlay.restore!.hidden = false
-            ChessPlay.player1?.textColor = UIColor.grayColor()
-            ChessPlay.player2?.textColor = UIColor.grayColor()
+            ChessPlay.replay!.isHidden = false
+            ChessPlay.restore!.isHidden = false
+            ChessPlay.player1?.textColor = UIColor.gray
+            ChessPlay.player2?.textColor = UIColor.gray
             return
         }
         
@@ -104,10 +104,10 @@ class ChessView: UIView {
             ChessPlay.isOver = true
             ChessPlay.winBoard?.textColor = UIColor(red:0.26, green:0.52, blue:0.96, alpha:1)
             ChessPlay.winBoard?.text = "Tie!"
-            ChessPlay.replay!.hidden = false
-            ChessPlay.restore!.hidden = false
-            ChessPlay.player1?.textColor = UIColor.grayColor()
-            ChessPlay.player2?.textColor = UIColor.grayColor()
+            ChessPlay.replay!.isHidden = false
+            ChessPlay.restore!.isHidden = false
+            ChessPlay.player1?.textColor = UIColor.gray
+            ChessPlay.player2?.textColor = UIColor.gray
             return
         }
         

@@ -31,8 +31,8 @@ class CrossView: UIView {
         self.crossLayer = CrossLayer(lineWidth: lineWidth, height: self.height)
         self.reset()
         self.crossLayer!.bounds = CGRect(x: 0, y: 0, width: self.height, height: self.height)
-        self.crossLayer!.position = CGPoint(x: CGRectGetMidX(self.bounds), y: CGRectGetMidY(self.bounds))
-        self.crossLayer!.contentsScale = UIScreen.mainScreen().scale
+        self.crossLayer!.position = CGPoint(x: self.bounds.midX, y: self.bounds.midY)
+        self.crossLayer!.contentsScale = UIScreen.main.scale
         self.layer.addSublayer(self.crossLayer!)
         
         self.crossLayer!.play()

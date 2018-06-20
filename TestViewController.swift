@@ -12,11 +12,11 @@ class TestViewController: UIViewController {
     var circleView: CircleView?
     var crossView: CrossView?
     
-    @IBAction func close(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func close(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func start(sender: UIButton) {
+    @IBAction func start(_ sender: UIButton) {
         
         self.circleView = CircleView()
         self.circleView?.frame = CGRect(x: 100, y: 100, width: 0, height: 0)

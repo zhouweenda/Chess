@@ -32,8 +32,8 @@ class CircleView: UIView {
         self.circleLayer = CircleLayer()
         self.reset()
         self.circleLayer!.bounds = CGRect(x: 0, y: 0, width: radius * 2 + lineWidth, height: radius * 2 + lineWidth)
-        self.circleLayer!.position = CGPoint(x: CGRectGetMidX(self.bounds), y: CGRectGetMidY(self.bounds))
-        self.circleLayer!.contentsScale = UIScreen.mainScreen().scale
+        self.circleLayer!.position = CGPoint(x: self.bounds.midX, y: self.bounds.midY)
+        self.circleLayer!.contentsScale = UIScreen.main.scale
         //self.circleLayer.color = UIColor.greenColor()
         self.circleLayer!.lineWidth = self.lineWidth
         self.layer.addSublayer(self.circleLayer!)
@@ -44,11 +44,11 @@ class CircleView: UIView {
         // animation
         let animation = CABasicAnimation(keyPath: "progress")
         animation.duration = 0.5
-        animation.fromValue = NSNumber(double: 0.0)
-        animation.toValue = NSNumber(double: 1.0)
-        animation.delegate = self
+        animation.fromValue = NSNumber(value: 0.0 as Double)
+        animation.toValue = NSNumber(value: 1.0 as Double)
+        animation.delegate = self as! CAAnimationDelegate
         animation.setValue("circle", forKey: "circleName")
-        self.circleLayer!.addAnimation(animation, forKey: nil)
+        self.circleLayer!.add(animation, forKey: nil)
 
     }
     

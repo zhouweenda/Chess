@@ -11,7 +11,7 @@ import UIKit
 
 class GoChessPlay: NSObject{
     
-    private static var chessboard: UIView?
+    fileprivate static var chessboard: UIView?
     static var chessViews = [[GoChessView]]()
     static var whoPlay:Bool = true
     static var isOver = false
@@ -72,15 +72,15 @@ class GoChessPlay: NSObject{
         GoChessPlay.player1?.textColor = UIColor(red:0.2, green:0.66, blue:0.33, alpha:1)
         GoChessPlay.player1?.text = "Player1"
         GoChessPlay.player2?.frame = CGRect(x: 265, y: 50, width: 100, height: 40)
-        GoChessPlay.player2?.textColor = UIColor.grayColor()
+        GoChessPlay.player2?.textColor = UIColor.gray
         GoChessPlay.player2?.text = "Player2"
-        GoChessPlay.player2?.textAlignment = NSTextAlignment.Right
+        GoChessPlay.player2?.textAlignment = NSTextAlignment.right
         parentView.addSubview(GoChessPlay.player1!)
         parentView.addSubview(GoChessPlay.player2!)
         
     }
     
-    private static func findStepsByPos(pos: CGPoint) -> Int{
+    fileprivate static func findStepsByPos(_ pos: CGPoint) -> Int{
         var i = 0
         for stepInfo in GoChessPlay.steps{
             if stepInfo.pos!.x == pos.x && stepInfo.pos!.y == pos.y{
@@ -91,16 +91,16 @@ class GoChessPlay: NSObject{
         return -1
     }
     
-    private static func deleteChess(chessInfo: ChessInfo){
+    fileprivate static func deleteChess(_ chessInfo: ChessInfo){
         let x = Int(chessInfo.pos!.x)
         let y = Int(chessInfo.pos!.y)
         GoChessPlay.chessViews[y][x].oneChess?.removeFromSuperview()
-        GoChessPlay.chessViews[y][x].chessInfo?.chessStatus = ChessStatus.NIL
+        GoChessPlay.chessViews[y][x].chessInfo?.chessStatus = ChessStatus.nil
     }
     
-    static func canPlay(chessInfo: ChessInfo) -> Bool{
-        let myVal = GoChessPlay.whoPlay ? ChessStatus.BLACK : ChessStatus.WHITE
-        var isCheck = [Int](count: GoChessPlay.steps.count, repeatedValue: 0)
+    static func canPlay(_ chessInfo: ChessInfo) -> Bool{
+        let myVal = GoChessPlay.whoPlay ? ChessStatus.black : ChessStatus.white
+        var isCheck = [Int](repeating: 0, count: GoChessPlay.steps.count)
         var flat = [ChessInfo]()
         
         let i = GoChessPlay.findStepsByPos(chessInfo.pos!)
@@ -131,8 +131,8 @@ class GoChessPlay: NSObject{
         
         //print("******************\(GoChessPlay.steps.count)")
         
-        let myVal = GoChessPlay.whoPlay ? ChessStatus.BLACK : ChessStatus.WHITE
-        var isCheck = [Int](count: GoChessPlay.steps.count, repeatedValue: 0)
+        let myVal = GoChessPlay.whoPlay ? ChessStatus.black : ChessStatus.white
+        var isCheck = [Int](repeating: 0, count: GoChessPlay.steps.count)
         var flat = [ChessInfo]()
         var i = -1
         //print("We will check \(myVal==ChessStatus.BLACK ? "black" : "white")")
@@ -170,24 +170,24 @@ class GoChessPlay: NSObject{
         
     }
     
-    private static func isEat(flatChessInfo: ChessInfo, myVal: ChessStatus) -> Bool{
-        if flatChessInfo.left != nil && flatChessInfo.left!.chessStatus == ChessStatus.NIL{
+    fileprivate static func isEat(_ flatChessInfo: ChessInfo, myVal: ChessStatus) -> Bool{
+        if flatChessInfo.left != nil && flatChessInfo.left!.chessStatus == ChessStatus.nil{
             return false
         }
-        if flatChessInfo.top != nil && flatChessInfo.top!.chessStatus == ChessStatus.NIL{
+        if flatChessInfo.top != nil && flatChessInfo.top!.chessStatus == ChessStatus.nil{
             return false
         }
-        if flatChessInfo.right != nil && flatChessInfo.right!.chessStatus == ChessStatus.NIL{
+        if flatChessInfo.right != nil && flatChessInfo.right!.chessStatus == ChessStatus.nil{
             return false
         }
-        if flatChessInfo.bottom != nil && flatChessInfo.bottom!.chessStatus == ChessStatus.NIL{
+        if flatChessInfo.bottom != nil && flatChessInfo.bottom!.chessStatus == ChessStatus.nil{
             return false
         } else {
             return true
         }
     }
     
-    private static func checkFlat(chessInfo: ChessInfo, inout flat: [ChessInfo], myVal: ChessStatus, inout isCheck: [Int]){
+    fileprivate static func checkFlat(_ chessInfo: ChessInfo, flat: inout [ChessInfo], myVal: ChessStatus, isCheck: inout [Int]){
         var posIndex = -1
         if chessInfo.left != nil && chessInfo.left!.chessStatus == myVal{
             posIndex = GoChessPlay.findStepsByPos(CGPoint(x: chessInfo.left!.pos!.x, y: chessInfo.left!.pos!.y))

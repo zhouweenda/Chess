@@ -35,13 +35,13 @@ class CrossLayer: CALayer {
     
     func play(){
         let path = UIBezierPath()
-        path.moveToPoint(CGPoint(x: 0, y: 0))
-        path.addLineToPoint(CGPoint(x: self.lineHeight, y: 0))
-        path.applyTransform(CGAffineTransformMakeRotation(CGFloat(1.0/4.0*M_PI)))
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: self.lineHeight, y: 0))
+        path.apply(CGAffineTransform(rotationAngle: CGFloat(1.0/4.0*M_PI)))
         self.lineOne!.lineWidth = self.lineWidth
         self.lineOne!.strokeEnd = 1.0
-        self.lineOne!.path = path.CGPath
-        self.lineOne!.strokeColor = UIColor(red:0.91, green:0.26, blue:0.21, alpha:1).CGColor
+        self.lineOne!.path = path.cgPath
+        self.lineOne!.strokeColor = UIColor(red:0.91, green:0.26, blue:0.21, alpha:1).cgColor
         self.lineOne!.fillColor = nil
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
@@ -49,18 +49,18 @@ class CrossLayer: CALayer {
         animation.toValue = 1.0
         animation.duration = 0.5
         
-        self.lineOne!.addAnimation(animation, forKey: nil)
+        self.lineOne!.add(animation, forKey: nil)
         
         
         
         let path2 = UIBezierPath()
-        path2.moveToPoint(CGPoint(x: self.lineHeight, y: 0))
-        path2.addLineToPoint(CGPoint(x: 0, y: 0))
-        path2.applyTransform(CGAffineTransformMakeRotation(CGFloat(3.0/4.0*M_PI)))
+        path2.move(to: CGPoint(x: self.lineHeight, y: 0))
+        path2.addLine(to: CGPoint(x: 0, y: 0))
+        path2.apply(CGAffineTransform(rotationAngle: CGFloat(3.0/4.0*M_PI)))
         self.lineTwo!.lineWidth = self.lineWidth
         self.lineTwo!.strokeEnd = 1.0
-        self.lineTwo!.path = path2.CGPath
-        self.lineTwo!.strokeColor = UIColor(red:0.91, green:0.26, blue:0.21, alpha:1).CGColor
+        self.lineTwo!.path = path2.cgPath
+        self.lineTwo!.strokeColor = UIColor(red:0.91, green:0.26, blue:0.21, alpha:1).cgColor
         self.lineTwo!.fillColor = nil
         
         let animation2 = CABasicAnimation(keyPath: "strokeEnd")
@@ -68,7 +68,7 @@ class CrossLayer: CALayer {
         animation2.toValue = 1.0
         animation2.duration = 0.5
         
-        self.lineTwo!.addAnimation(animation2, forKey: nil)
+        self.lineTwo!.add(animation2, forKey: nil)
         
     }
     

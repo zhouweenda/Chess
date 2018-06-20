@@ -11,7 +11,7 @@ import UIKit
 
 class FiveChessPlay: NSObject{
     
-    private static var chessboard: UIView?
+    fileprivate static var chessboard: UIView?
     static var chessViews = [[FiveChessView]]()
     static var whoPlay:Bool = true
     static var isOver = false
@@ -61,20 +61,20 @@ class FiveChessPlay: NSObject{
         FiveChessPlay.player1?.textColor = UIColor(red:0.2, green:0.66, blue:0.33, alpha:1)
         FiveChessPlay.player1?.text = "Player1"
         FiveChessPlay.player2?.frame = CGRect(x: 265, y: 50, width: 100, height: 40)
-        FiveChessPlay.player2?.textColor = UIColor.grayColor()
+        FiveChessPlay.player2?.textColor = UIColor.gray
         FiveChessPlay.player2?.text = "Player2"
-        FiveChessPlay.player2?.textAlignment = NSTextAlignment.Right
+        FiveChessPlay.player2?.textAlignment = NSTextAlignment.right
         parentView.addSubview(FiveChessPlay.player1!)
         parentView.addSubview(FiveChessPlay.player2!)
         
         
-        FiveChessPlay.regret = UIButton(type: UIButtonType.System)
-        FiveChessPlay.regret!.setTitle("悔棋", forState: UIControlState.Normal)
+        FiveChessPlay.regret = UIButton(type: UIButtonType.system)
+        FiveChessPlay.regret!.setTitle("悔棋", for: UIControlState())
         FiveChessPlay.regret!.frame = CGRect(x: 162, y: 550, width: 50, height: 50)
-        FiveChessPlay.regret!.hidden = true
+        FiveChessPlay.regret!.isHidden = true
         parentView.addSubview(FiveChessPlay.regret!)
         
-        FiveChessPlay.regret!.addTarget(self, action: "onRegretClick", forControlEvents: UIControlEvents.TouchUpInside)
+        FiveChessPlay.regret!.addTarget(self, action: #selector(FiveChessPlay.onRegretClick), for: UIControlEvents.touchUpInside)
         
     }
     
@@ -90,15 +90,15 @@ class FiveChessPlay: NSObject{
         FiveChessPlay.chessViews[y][x].val = nil
         
         if FiveChessPlay.whoPlay{
-            FiveChessPlay.player1?.textColor = UIColor.grayColor()
+            FiveChessPlay.player1?.textColor = UIColor.gray
             FiveChessPlay.player2?.textColor = UIColor(red:0.91, green:0.26, blue:0.21, alpha:1)
         } else {
-            FiveChessPlay.player2?.textColor = UIColor.grayColor()
+            FiveChessPlay.player2?.textColor = UIColor.gray
             FiveChessPlay.player1?.textColor = UIColor(red:0.2, green:0.66, blue:0.33, alpha:1)
         }
         
         FiveChessPlay.whoPlay = !FiveChessPlay.whoPlay
-        FiveChessPlay.regret!.hidden = true
+        FiveChessPlay.regret!.isHidden = true
     }
     
     
@@ -112,28 +112,28 @@ class FiveChessPlay: NSObject{
             wins = 1
             if self.checkRight(initWin, wins: &wins, x: x, y: y) {
                 for i in 0...4{
-                    FiveChessPlay.chessViews[y][x+i].oneChess?.backgroundColor = UIColor.redColor()
+                    FiveChessPlay.chessViews[y][x+i].oneChess?.backgroundColor = UIColor.red
                 }
                 return true
             }
             wins = 1
             if self.checkDown(initWin, wins: &wins, x: x, y: y) {
                 for i in 0...4{
-                    FiveChessPlay.chessViews[y+i][x].oneChess?.backgroundColor = UIColor.redColor()
+                    FiveChessPlay.chessViews[y+i][x].oneChess?.backgroundColor = UIColor.red
                 }
                 return true
             }
             wins = 1
             if self.checkRightBottom(initWin, wins: &wins, x: x, y: y) {
                 for i in 0...4{
-                    FiveChessPlay.chessViews[y+i][x+i].oneChess?.backgroundColor = UIColor.redColor()
+                    FiveChessPlay.chessViews[y+i][x+i].oneChess?.backgroundColor = UIColor.red
                 }
                 return true
             }
             wins = 1
             if self.checkRightTop(initWin, wins: &wins, x: x, y: y) {
                 for i in 0...4{
-                    FiveChessPlay.chessViews[y-i][x+i].oneChess?.backgroundColor = UIColor.redColor()
+                    FiveChessPlay.chessViews[y-i][x+i].oneChess?.backgroundColor = UIColor.red
                 }
                 return true
             }
@@ -143,7 +143,7 @@ class FiveChessPlay: NSObject{
         return false
     }
     
-    private static func checkRightTop(initWin: Int?, inout wins: Int, x: Int, y: Int) -> Bool{
+    fileprivate static func checkRightTop(_ initWin: Int?, wins: inout Int, x: Int, y: Int) -> Bool{
         if x + 1 > 18 || y - 1 < 0{
             return false
         }
@@ -164,7 +164,7 @@ class FiveChessPlay: NSObject{
     }
     
     
-    private static func checkRightBottom(initWin: Int?, inout wins: Int, x: Int, y: Int) -> Bool{
+    fileprivate static func checkRightBottom(_ initWin: Int?, wins: inout Int, x: Int, y: Int) -> Bool{
         if x + 1 > 18 || y + 1 > 18{
             return false
         }
@@ -184,7 +184,7 @@ class FiveChessPlay: NSObject{
         return false
     }
     
-    private static func checkDown(initWin: Int?, inout wins: Int, x: Int, y: Int) -> Bool{
+    fileprivate static func checkDown(_ initWin: Int?, wins: inout Int, x: Int, y: Int) -> Bool{
         if y + 1 > 18{
             return false
         }
@@ -204,7 +204,7 @@ class FiveChessPlay: NSObject{
         return false
     }
     
-    private static func checkRight(initWin: Int?, inout wins: Int, x: Int, y: Int) -> Bool{
+    fileprivate static func checkRight(_ initWin: Int?, wins: inout Int, x: Int, y: Int) -> Bool{
         if x + 1 > 18 {
             return false
         }

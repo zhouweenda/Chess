@@ -11,15 +11,15 @@ import UIKit
 
 
 enum ChessStatus{
-    case BLACK
-    case WHITE
-    case NIL
+    case black
+    case white
+    case `nil`
 }
 
 class ChessInfo {
     var pos: CGPoint?
-    private var x: Int = -1
-    private var y: Int = -1
+    fileprivate var x: Int = -1
+    fileprivate var y: Int = -1
     var chessStatus: ChessStatus?
     var left: ChessInfo?
     var right: ChessInfo?
@@ -31,7 +31,7 @@ class ChessInfo {
         self.pos = pos
         self.x = Int(pos.x)
         self.y = Int(pos.y)
-        self.chessStatus = ChessStatus.NIL
+        self.chessStatus = ChessStatus.nil
     }
     
     func initPosition(){

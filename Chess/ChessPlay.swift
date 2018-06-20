@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 class ChessPlay: NSObject{
-    private static var chessboard: UIView?
-    private var chessLine1: CALayer?
-    private var chessLine2: CALayer?
-    private var chessLine3: CALayer?
-    private var chessLine4: CALayer?
+    fileprivate static var chessboard: UIView?
+    fileprivate var chessLine1: CALayer?
+    fileprivate var chessLine2: CALayer?
+    fileprivate var chessLine3: CALayer?
+    fileprivate var chessLine4: CALayer?
     static var chessViews = [[ChessView]]()
     static var whoPlay:Bool = true
     static var winBoard: UILabel?
@@ -33,19 +33,19 @@ class ChessPlay: NSObject{
         ChessPlay.chessboard!.frame = CGRect(x: 35, y: 150, width: 300, height: 300)
         self.chessLine1 = CALayer()
         self.chessLine1!.frame = CGRect(x: 0, y: 100, width: 300, height: 2)
-        self.chessLine1!.backgroundColor = UIColor.brownColor().CGColor
+        self.chessLine1!.backgroundColor = UIColor.brown.cgColor
         ChessPlay.chessboard!.layer.addSublayer(self.chessLine1!)
         self.chessLine2 = CALayer()
         self.chessLine2!.frame = CGRect(x: 0, y: 200, width: 300, height: 2)
-        self.chessLine2!.backgroundColor = UIColor.brownColor().CGColor
+        self.chessLine2!.backgroundColor = UIColor.brown.cgColor
         ChessPlay.chessboard!.layer.addSublayer(self.chessLine2!)
         self.chessLine3 = CALayer()
         self.chessLine3!.frame = CGRect(x: 100, y: 0, width: 2, height: 300)
-        self.chessLine3!.backgroundColor = UIColor.brownColor().CGColor
+        self.chessLine3!.backgroundColor = UIColor.brown.cgColor
         ChessPlay.chessboard!.layer.addSublayer(self.chessLine3!)
         self.chessLine4 = CALayer()
         self.chessLine4!.frame = CGRect(x: 200, y: 0, width: 2, height: 300)
-        self.chessLine4!.backgroundColor = UIColor.brownColor().CGColor
+        self.chessLine4!.backgroundColor = UIColor.brown.cgColor
         ChessPlay.chessboard!.layer.addSublayer(self.chessLine4!)
         parentView.addSubview(ChessPlay.chessboard!)
         
@@ -81,9 +81,9 @@ class ChessPlay: NSObject{
         ChessPlay.player1?.textColor = UIColor(red:0.2, green:0.66, blue:0.33, alpha:1)
         ChessPlay.player1?.text = "Player1"
         ChessPlay.player2?.frame = CGRect(x: 235, y: 65, width: 100, height: 40)
-        ChessPlay.player2?.textColor = UIColor.grayColor()
+        ChessPlay.player2?.textColor = UIColor.gray
         ChessPlay.player2?.text = "Player2"
-        ChessPlay.player2?.textAlignment = NSTextAlignment.Right
+        ChessPlay.player2?.textAlignment = NSTextAlignment.right
         parentView.addSubview(ChessPlay.player1!)
         parentView.addSubview(ChessPlay.player2!)
         
@@ -93,22 +93,22 @@ class ChessPlay: NSObject{
         ChessPlay.huangGuan!.font = UIFont(name: "iconfont", size: 40)
         ChessPlay.huangGuan!.text = "\u{e603}"
         ChessPlay.huangGuan!.textColor = UIColor(red:0.98, green:0.74, blue:0.02, alpha:1)
-        ChessPlay.huangGuan!.hidden = true
+        ChessPlay.huangGuan!.isHidden = true
         parentView.addSubview(ChessPlay.huangGuan!)
         
-        ChessPlay.replay = UIButton(type: UIButtonType.System)
-        ChessPlay.restore = UIButton(type: UIButtonType.System)
-        ChessPlay.restore!.setTitle("复盘", forState: UIControlState.Normal)
+        ChessPlay.replay = UIButton(type: UIButtonType.system)
+        ChessPlay.restore = UIButton(type: UIButtonType.system)
+        ChessPlay.restore!.setTitle("复盘", for: UIControlState())
         ChessPlay.restore!.frame = CGRect(x: 200, y: 500, width: 50, height: 50)
-        ChessPlay.restore!.hidden = true
+        ChessPlay.restore!.isHidden = true
         parentView.addSubview(ChessPlay.restore!)
-        ChessPlay.replay!.setTitle("重新开始", forState: UIControlState.Normal)
+        ChessPlay.replay!.setTitle("重新开始", for: UIControlState())
         ChessPlay.replay!.frame = CGRect(x: 260, y: 500, width: 100, height: 50)
-        ChessPlay.replay!.hidden = true
+        ChessPlay.replay!.isHidden = true
         parentView.addSubview(ChessPlay.replay!)
         
-        ChessPlay.replay!.addTarget(self, action: "onReplayClick", forControlEvents: UIControlEvents.TouchUpInside)
-        ChessPlay.restore!.addTarget(self, action: "onRestoreClick", forControlEvents: UIControlEvents.TouchUpInside)
+        ChessPlay.replay!.addTarget(self, action: #selector(ChessPlay.onReplayClick), for: UIControlEvents.touchUpInside)
+        ChessPlay.restore!.addTarget(self, action: #selector(ChessPlay.onRestoreClick), for: UIControlEvents.touchUpInside)
         
     }
     
@@ -152,10 +152,10 @@ class ChessPlay: NSObject{
         
         ChessPlay.winBoard!.text = ""
         ChessPlay.player1?.textColor = UIColor(red:0.2, green:0.66, blue:0.33, alpha:1)
-        ChessPlay.player2?.textColor = UIColor.grayColor()
-        ChessPlay.replay!.hidden = true
-        ChessPlay.restore!.hidden = true
-        ChessPlay.huangGuan!.hidden = true
+        ChessPlay.player2?.textColor = UIColor.gray
+        ChessPlay.replay!.isHidden = true
+        ChessPlay.restore!.isHidden = true
+        ChessPlay.huangGuan!.isHidden = true
         
     }
     
@@ -188,7 +188,7 @@ class ChessPlay: NSObject{
         return false
     }
     
-    private static func checkRightTop(initWin: Int?, inout wins: Int, x: Int, y: Int) -> Bool{
+    fileprivate static func checkRightTop(_ initWin: Int?, wins: inout Int, x: Int, y: Int) -> Bool{
         if x + 1 > 2 || y - 1 < 0{
             return false
         }
@@ -209,7 +209,7 @@ class ChessPlay: NSObject{
     }
 
     
-    private static func checkRightBottom(initWin: Int?, inout wins: Int, x: Int, y: Int) -> Bool{
+    fileprivate static func checkRightBottom(_ initWin: Int?, wins: inout Int, x: Int, y: Int) -> Bool{
         if x + 1 > 2 || y + 1 > 2{
             return false
         }
@@ -229,7 +229,7 @@ class ChessPlay: NSObject{
         return false
     }
     
-    private static func checkDown(initWin: Int?, inout wins: Int, x: Int, y: Int) -> Bool{
+    fileprivate static func checkDown(_ initWin: Int?, wins: inout Int, x: Int, y: Int) -> Bool{
         if y + 1 > 2{
             return false
         }
@@ -249,7 +249,7 @@ class ChessPlay: NSObject{
         return false
     }
     
-    private static func checkRight(initWin: Int?, inout wins: Int, x: Int, y: Int) -> Bool{
+    fileprivate static func checkRight(_ initWin: Int?, wins: inout Int, x: Int, y: Int) -> Bool{
         if x + 1 > 2 {
             return false
         }
